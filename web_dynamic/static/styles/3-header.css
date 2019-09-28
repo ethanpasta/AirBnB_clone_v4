@@ -12,3 +12,17 @@ header {
 	width: 100%;
 	border-bottom: 1px solid #CCCCCC;
 }
+
+div.available {
+    background-color: #ff545f;
+}
+
+header div {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 30px;
+    margin-top: 15px;
+    margin-left: auto;
+    background-color: #cccccc;
+}
