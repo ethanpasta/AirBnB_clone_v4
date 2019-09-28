@@ -72,6 +72,12 @@
 	display: list-item;
 }
 
+.container .filters .amenities h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .container .filters .popover {
 	max-height: 300px;
 	overflow: scroll;
