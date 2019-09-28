@@ -1,12 +1,12 @@
-$(document).read(function() {
-  let arr = [];
-  $('input[type=checkbox]').each(function() {
+$(document).ready(function () {
+  const arr = [];
+  $('input[type=checkbox]').each(function () {
     if (this.checked) {
-      arr.push(this.getAttribute('data-id'));
+      arr.push(this.getAttribute('data-name'));
     } else {
-      let index = arr.indexOf(this.getAttribute('data-id'));
+      const index = arr.indexOf(this.getAttribute('data-name'));
       if (index > -1) {
-	arr.splice(index, 1);
+        arr.splice(index, 1);
       }
     }
   });
