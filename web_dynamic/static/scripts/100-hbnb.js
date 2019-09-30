@@ -1,15 +1,61 @@
 $(document).ready(function () {
-  const dict = {};
-  $('input[type=checkbox]').each(function () {
+  const big_dict = {};
+  const amenVal = [];
+  const amenKey = [];
+  const stateVal = [];
+  const stateKey = [];
+  const cityVal = [];
+  const cityKey = [];
+  $('div.amenities > ul > li > input[type=checkbox]').each(function () {
     $(this).change(function () {
+      const name = this.getAttribute('data-name');
+      const id = this.getAttribute('data-id');
       if (this.checked) {
-        dict[this.getAttribute('data-id')] = this.getAttribute('data-name');
+        amenVal.push(name);
+        amenKey.push(id);
       } else {
-        delete dict[this.getAttribute('data-id')];
+        if (amenVal.indexOf(name) > -1) {
+	  amenVal.splice(amenVal.indexOf(name), 1);
+	  amenKey.splice(amenKey.indexOf(id), 1);
+        }
       }
-      const arr = $.map(dict, function (value, key) { return value; });
-      $('div.amenities h4').html(arr.join(', '));
-      $('div.locations h4').html(arr2.join(', '));
+      big_dict.amenities = amenKey;
+      $('div.amenities h4').html(amenVal.join(', '));
+    });
+  });
+  $('div.locations > ul.popover > li > input[type=checkbox]').each(function () {
+    $(this).change(function () {
+      const name = this.getAttribute('data-name');
+      const id = this.getAttribute('data-id');
+      console.log('state: ' + name, id);
+      if (this.checked) {
+        stateVal.push(name);
+        stateKey.push(id);
+      } else {
+        if (stateVal.indexOf(name) > -1) {
+	  stateVal.splice(stateVal.indexOf(name), 1);
+	  stateKey.splice(stateKey.indexOf(id), 1);
+        }
+      }
+      big_dict.states = stateKey;
+      $('div.locations h4').html(cityVal.concat(stateVal).join(', '));
+    });
+  });
+  $('div.locations > ul.popover > li > ul > li > input[type=checkbox]').each(function () {
+    $(this).change(function () {
+      const name = this.getAttribute('data-name');
+      const id = this.getAttribute('data-id');
+      if (this.checked) {
+        cityVal.push(name);
+        cityKey.push(id);
+      } else {
+        if (cityVal.indexOf(name) > -1) {
+	  cityVal.splice(cityVal.indexOf(name), 1);
+	  cityKey.splice(cityKey.indexOf(id), 1);
+        }
+      }
+      big_dict.cities = cityKey;
+      $('div.locations h4').html(stateVal.concat(cityVal).join(', '));
     });
   });
   $.get('http://localhost:5001/api/v1/status/', function (data, status) {
@@ -20,17 +66,15 @@ $(document).ready(function () {
     }
   });
   $('button').click(function () {
-    /* semi standard did not like var myObject = new Object(); so i changed it to equal {} */
-    var myObject = {};
-    myObject.amenities = $.map(dict, function (value, key) { return key; });
-    myObject.states = $.map(dict, function (value, key) {return key; });
-    myObject.cites = $.map(dict, function (value, key) {return key;});
+    console.log(big_dict);
     $.ajax({
       type: 'POST',
       url: 'http://localhost:5001/api/v1/places_search/',
       contentType: 'application/json',
-      data: JSON.stringify(myObject)
+      data: JSON.stringify(big_dict)
     }).done(function (data) {
+      $('section.places').empty();
+      $('section.places').append('<h1>Places</h1>');
       $.each(data, function (index, p) {
         const str = '<article><div class=\'title\'><h2>' + p.name +
         '</h2><div class=\'price_by_night\'>' + p.price_by_night +
