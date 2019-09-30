@@ -20,7 +20,6 @@ $(document).ready(function () {
       $('div#api_status').removeClass('available');
     }
   });
-
   $.ajax({
     type: 'POST',
     url: 'http://localhost:5001/api/v1/places_search/',

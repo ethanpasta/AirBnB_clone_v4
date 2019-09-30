@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const big_dict = {};
+  const bigDict = {};
   const amenVal = [];
   const amenKey = [];
   const stateVal = [];
@@ -13,13 +13,11 @@ $(document).ready(function () {
       if (this.checked) {
         amenVal.push(name);
         amenKey.push(id);
-      } else {
-        if (amenVal.indexOf(name) > -1) {
-	  amenVal.splice(amenVal.indexOf(name), 1);
-	  amenKey.splice(amenKey.indexOf(id), 1);
-        }
+      } else if (amenVal.indexOf(name) > -1) {
+        amenVal.splice(amenVal.indexOf(name), 1);
+        amenKey.splice(amenKey.indexOf(id), 1);
       }
-      big_dict.amenities = amenKey;
+      bigDict.amenities = amenKey;
       $('div.amenities h4').html(amenVal.join(', '));
     });
   });
@@ -31,13 +29,11 @@ $(document).ready(function () {
       if (this.checked) {
         stateVal.push(name);
         stateKey.push(id);
-      } else {
-        if (stateVal.indexOf(name) > -1) {
-	  stateVal.splice(stateVal.indexOf(name), 1);
-	  stateKey.splice(stateKey.indexOf(id), 1);
-        }
+      } else if (stateVal.indexOf(name) > -1) {
+        stateVal.splice(stateVal.indexOf(name), 1);
+        stateKey.splice(stateKey.indexOf(id), 1);
       }
-      big_dict.states = stateKey;
+      bigDict.states = stateKey;
       $('div.locations h4').html(cityVal.concat(stateVal).join(', '));
     });
   });
@@ -48,13 +44,11 @@ $(document).ready(function () {
       if (this.checked) {
         cityVal.push(name);
         cityKey.push(id);
-      } else {
-        if (cityVal.indexOf(name) > -1) {
-	  cityVal.splice(cityVal.indexOf(name), 1);
-	  cityKey.splice(cityKey.indexOf(id), 1);
-        }
+      } else if (cityVal.indexOf(name) > -1) {
+        cityVal.splice(cityVal.indexOf(name), 1);
+        cityKey.splice(cityKey.indexOf(id), 1);
       }
-      big_dict.cities = cityKey;
+      bigDict.cities = cityKey;
       $('div.locations h4').html(stateVal.concat(cityVal).join(', '));
     });
   });
@@ -66,16 +60,17 @@ $(document).ready(function () {
     }
   });
   $('button').click(function () {
-    console.log(big_dict);
+    console.log(bigDict);
     $.ajax({
       type: 'POST',
       url: 'http://localhost:5001/api/v1/places_search/',
       contentType: 'application/json',
-      data: JSON.stringify(big_dict)
+      data: JSON.stringify(bigDict)
     }).done(function (data) {
       $('section.places').empty();
       $('section.places').append('<h1>Places</h1>');
       $.each(data, function (index, p) {
+        console.log(p.id);
         const str = '<article><div class=\'title\'><h2>' + p.name +
         '</h2><div class=\'price_by_night\'>' + p.price_by_night +
         '</div></div><div class=\'information\'><div class=\'max_guest\'>' +
