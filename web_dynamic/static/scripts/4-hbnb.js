@@ -28,6 +28,8 @@ $(document).ready(function () {
       contentType: 'application/json',
       data: JSON.stringify(myObject)
     }).done(function (data) {
+      $('section.places').empty();
+      $('section.places').append('<h1>Places</h1>');
       $.each(data, function (index, p) {
         const str = '<article><div class=\'title\'><h2>' + p.name +
         '</h2><div class=\'price_by_night\'>' + p.price_by_night +
