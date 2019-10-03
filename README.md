@@ -1,8 +1,11 @@
 <img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/HBTN-hbnb-Final.png" width="160" height=auto />
 
-# AirBnB Clone: Phase # 3
+# AirBnB Clone: Phase # 4
 
-: API with Swagger
+: WEB Dynamic
+
+During the web dynamic portion of the project we change our filters section which is currently
+static and make it dynamic.
 
 ## Description
 
@@ -210,6 +213,27 @@ create: create [ARG] [PARAM 1] [PARAM 2] ...
 Uses [Travis-CI](https://travis-ci.org/) to run all tests on all commits to the
 github repo
 
+## Web Dynamic (latest update)
+
+The static search bar is updating to a functioning search bar. There is not a checkbox for the list 
+of Amenities, States, and Cities. When either is selected they are stored into a list until search 
+is clicked. Once search is clicked JQuery is used to call only the objects that meet the requirments
+of the search from the database sends them to the page.
+
+#### API Status
+
+The status of the API can be seen in the top right hand corner of the webpage. if the cirle is grey
+there is an issue with the api. Grey indicates it is not on. if it is Red the API is running 
+properly, the status value is 'OK'.
+
+* To start API:
+`HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db HBNB_API_PORT=5001 python3 -m api.v1.app`
+
+* To start Web Application:
+`HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_dynamic.0-hbnb`
+
+* In web browser open: http://0.0.0.0:5001/100-hbnb
+
 ## Authors
 
 * MJ Johnson, [@mj31508](https://github.com/mj31508)
@@ -218,7 +242,7 @@ github repo
 * Carrie Ybay, [hicarrie](https://github.com/hicarrie) | [@hicarrie_](https://twitter.com/hicarrie_)
 * Jared Heck, [jarehec](https://github.com/jarehec) | [@jarehec](https://twitter.com/jarehec)
 * Ethan Mayer, [ethanpasta](https://github.com/ethanpasta) | [@eitanmayer57](https://twitter.com/eitanmayer57)
-
+* Amber McBride, [abmcbride5](https://github.com/abmcbride5) | [@Ambie`_`Mick](https://twitter.com/Ambie_Mick)
 
 ## License
 
